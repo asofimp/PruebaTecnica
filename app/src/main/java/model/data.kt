@@ -1,34 +1,27 @@
 package model
 
-class data {
-    private var id: String? = null
-    private var type: String? = null
-    private var name: String? = null
-    private var ppu: String? = null
-    private var batters: String? = null
-    private var topping: String? = null
 
-    fun getId(): String? {
-        return id
-    }
 
-    fun getType(): String? {
-        return type
-    }
+    data class Donut(
+        val id: String,
+        val type: String,
+        val name: String,
+        val ppu: Double,
+        val batters: Batters,
+        val topping: List<Topping>
+    )
 
-    fun getName(): String? {
-        return name
-    }
+    data class Batters(
+        val batter: List<Batter>
+    )
 
-    fun getPpu(): String? {
-        return ppu
-    }
+    data class Batter(
+        val id: String,
+        val type: String
+    )
 
-    fun getBatters(): String?{
-        return batters
-    }
+    data class Topping(
+        val id: String,
+        val type: String
+    )
 
-    fun getTopping():String?{
-        return topping
-    }
-}

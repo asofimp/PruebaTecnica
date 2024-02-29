@@ -8,29 +8,13 @@
     android:background="#ffffff">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rV_Data"
-        android:layout_width="286dp"
-        android:layout_height="522dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="81dp"
-        android:layout_height="83dp"
-        android:layout_marginStart="250dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="590dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/rv_data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/img" />
+        tools:listitem="@layout/fragment_item_donuts" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

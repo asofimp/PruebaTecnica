@@ -4,4 +4,7 @@
     <string name="user">User</string>
     <string name="text">Text</string>
     <string name="password">Password</string>
+    <string name="registrate">Registrate</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

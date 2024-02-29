@@ -27,15 +27,15 @@ class RegisterActivity : AppCompatActivity() {
         password = findViewById(R.id.password_Register)
         confirmPassword = findViewById(R.id.confirmPassRegister)
 
-        //almacenar de forma bolatil
-        val usuarioAgregar = usuario.text.toString().trim()
-        val contrasenaAgregar = password.text.toString().trim()
-        val emailAgregar = email.text.toString().trim()
-        val confirmAgregar = confirmPassword.text.toString().trim()
 
-        //funcion validadora
-        ValidarForm(usuarioAgregar, contrasenaAgregar, confirmAgregar, emailAgregar)
+        almacenaDatos.setOnClickListener {
+            val usuarioAgregar = usuario.text.toString().trim()
+            val contrasenaAgregar = password.text.toString().trim()
+            val emailAgregar = email.text.toString().trim()
+            val confirmAgregar = confirmPassword.text.toString().trim()
 
+            ValidarForm(usuarioAgregar, contrasenaAgregar, confirmAgregar, emailAgregar)
+        }
     }
 
     fun ValidarForm(usuario: String, password: String, confirmPassword: String, email: String) {
@@ -52,16 +52,17 @@ class RegisterActivity : AppCompatActivity() {
 
         if (!validadarPassword) {
             mostrarToast("Se necesita 6 caracteres y una letra Mayuscula")
-        } else
-            if (!validarUsuario) {
+        } else if (!validarUsuario) {
                 mostrarToast("Se necesita mas de 8 caracteres")
-            } else if (password == confirmPassword) {
+        } else if (password == confirmPassword) {
                 mostrarToast("Contraseñas no coincicen")
-            } else if (!validarCorreo) {
+        } else if (!validarCorreo) {
                 mostrarToast("Error en email")
-            } else {
-                mostrarToast("Registro Completado")
-            }
+        } else {
+            mostrarToast("Registro Completado")
+            val intent = Intent(this@RegisterActivity, MainActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
