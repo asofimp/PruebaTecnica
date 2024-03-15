@@ -19,7 +19,7 @@ class InicioActivity : AppCompatActivity() {
 
 
         recyclerView = findViewById(R.id.rv_data)
-        recyclerView.layoutManager = GridLayoutManager(applicationContext, 2)
+        recyclerView.layoutManager = GridLayoutManager(applicationContext, 1)
         init()
 
     }
@@ -48,23 +48,4 @@ class InicioActivity : AppCompatActivity() {
         })
     }
 }
-
-/*
-fun showMovies() {
-    val call: Call<List<Movie>> = ApiClient.getClient().create(ApiMovie::class.java).getMovies()
-    call.enqueue(object : Callback<List<Movie>> {
-        override fun onResponse(call: Call<List<Movie>>, response: Response<List<Movie>>) {
-            if (response.isSuccessful) {
-                movies = response.body()
-                movieAdapter = MovieAdapter(movies, applicationContext)
-                recyclerView.adapter = movieAdapter
-            }
-        }
-
-        override fun onFailure(call: Call<List<Movie>>, t: Throwable) {
-            Toast.makeText(this@Inicio, "Error de conexión", Toast.LENGTH_SHORT).show()
-        }
-    })
-}
- */
 

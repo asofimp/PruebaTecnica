@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".InicioActivity"
-    android:background="#ffffff">
+    android:background="#625b71">
 
     <TextView
         android:id="@+id/textView5"
@@ -17,11 +17,12 @@
         android:text="Donas"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:background="#7CF786"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#fff"/>
+
 
 
     <androidx.recyclerview.widget.RecyclerView

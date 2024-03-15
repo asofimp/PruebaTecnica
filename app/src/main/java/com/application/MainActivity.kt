@@ -1,11 +1,11 @@
 package com.application
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         val registerbtn: TextView = findViewById(R.id.pantallaRegistro)
         registerbtn.setOnClickListener{
-            val intent: Intent = Intent(this, RegisterActivity::class.java)
+            val intent: Intent = Intent(this,RegisterActivity::class.java)
             startActivity(intent)
         }
 
