@@ -1,99 +1,70 @@
 package com.application
 
-import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import adapter.AdapterData
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import model.Donut
-import network.ApiData
-import network.ApiDataRoute
-import retrofit2.Call
-import retrofit2.Callback
+import network.Api
 import retrofit2.Response
 
 class InicioActivity : AppCompatActivity() {
-
-    private lateinit var adapterData: AdapterData
-
+    lateinit var recyclerView : RecyclerView
+    lateinit var donuts: List<Donut>
+    lateinit var adapterData : AdapterData
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inicio)
 
-        val recyclerView: RecyclerView = findViewById(R.id.rv_data)
 
-        showData(recyclerView)
+        recyclerView = findViewById(R.id.rv_data)
+        recyclerView.layoutManager = GridLayoutManager(applicationContext, 2)
+        init()
+
     }
 
-    private fun showData(recyclerView: RecyclerView) {
-        val apiService: ApiDataRoute = ApiData.getClient().create(ApiDataRoute::class.java)
-        val call: Call<List<Donut>> = apiService.getDonuts()
+    private fun init() {
 
-        call.enqueue(object : Callback<List<Donut>> {
-            override fun onResponse(call: Call<List<Donut>>, response: Response<List<Donut>>) {
+        val request = Api.build().getDonuts()
+        request.enqueue(object : retrofit2.Callback<List<Donut>> {
+            override fun onResponse(
+                call: retrofit2.Call<List<Donut>>,
+                response: Response<List<Donut>>
+            ) {
                 if (response.isSuccessful) {
-                    val datos: List<Donut>? = response.body()
-                    datos?.let {
-                        adapterData = AdapterData(it, applicationContext)
-                        recyclerView.adapter = adapterData
-                    }
+                    val donutResponse = response.body()
+                    donuts = donutResponse ?: emptyList()
+                    adapterData = AdapterData(donuts)
+                    recyclerView.adapter = adapterData
                 } else {
-                    Toast.makeText(applicationContext, "Error en la respuesta del servidor", Toast.LENGTH_SHORT).show()
+                    println("Error en la respuesta: ${response.code()}")
                 }
             }
 
-            override fun onFailure(call: Call<List<Donut>>, t: Throwable) {
-                Toast.makeText(applicationContext, "Error en la conexión al servidor", Toast.LENGTH_SHORT).show()
+            override fun onFailure(call: retrofit2.Call<List<Donut>>, t: Throwable) {
+                println(t.message)
             }
         })
     }
 }
 
-
-
-/*import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import adapter.AdapterData
-import androidx.lifecycle.MutableLiveData
-import model.Donut
-import network.ApiData
-import network.ApiDataRoute
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import javax.inject.Inject
-
-class InicioActivity : AppCompatActivity() {
-
-    private lateinit var adapterData: AdapterData
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_item_donuts)
-
-        showData()
-    }
-
-    private fun showData() :MutableLiveData{
-        val call: Call<List<Donut>> = ApiDataRoute.getClient
-
-        call.enqueue(object : Callback<List<Donut>> {
-            override fun onResponse(call: Call<List<Donut>>, response: Response<List<Donut>>) {
-                if (response.isSuccessful) {
-                    val datos: List<Donut>? = response.body()
-                    datos?.let {
-                        adapterData = AdapterData(it, applicationContext)
-
-                    }
-                } else {
-                    Toast.makeText(applicationContext, "Error en la respuesta del servidor", Toast.LENGTH_SHORT).show()
-                }
+/*
+fun showMovies() {
+    val call: Call<List<Movie>> = ApiClient.getClient().create(ApiMovie::class.java).getMovies()
+    call.enqueue(object : Callback<List<Movie>> {
+        override fun onResponse(call: Call<List<Movie>>, response: Response<List<Movie>>) {
+            if (response.isSuccessful) {
+                movies = response.body()
+                movieAdapter = MovieAdapter(movies, applicationContext)
+                recyclerView.adapter = movieAdapter
             }
+        }
 
-            override fun onFailure(call: Call<List<Donut>>, t: Throwable) {
-                Toast.makeText(applicationContext, "Error en la conexión al servidor", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
-}*/
+        override fun onFailure(call: Call<List<Movie>>, t: Throwable) {
+            Toast.makeText(this@Inicio, "Error de conexión", Toast.LENGTH_SHORT).show()
+        }
+    })
+}
+ */
+
